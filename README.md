@@ -1,92 +1,28 @@
-# 🥗 CampusFuel AI – Smart Diet Assistant for Students
+# CampusFuel AI - Smart Nutrition Assistant
 
-## 📌 Overview
-CampusFuel AI is a student-friendly AI-powered fitness and diet assistant inspired by MyFitnessPal.  
-It helps students quickly analyze their daily food intake and get simple, actionable health insights.
+**CampusFuel AI** is a smart, dynamic student nutrition and fitness assistant built for the **Google Antigravity Hackathon**.
 
----
+## Chosen Vertical
+**Health & Fitness (Student Nutrition Assistant)**
 
-## 🎯 Problem
-Students often have unhealthy eating habits and do not track their diet due to:
-- Lack of time
-- Complex fitness apps
-- No personalized feedback
+## Approach and Logic
+CampusFuel AI bridges the gap between complicated macro-tracking apps and the reality of student life (eating mess food, instant noodles, and cafeteria snacks). Instead of relying on a rigid local database, it uses **Google Gemini AI** to act as a dynamic nutrition coach.
 
----
+### How it works:
+1. **User Profile:** Enter your Height, Weight, and Workout Intensity. The app instantly calculates your BMI.
+2. **Food Logging:** Type your daily food intake in natural language (e.g., "2 eggs, a burger, and a cola").
+3. **AI Evaluation (Gemini Integration):** The frontend sends your profile and food log to the Java backend (`/api/analyze`). The backend securely communicates with the **Gemini API** via a structured prompt to generate a JSON response containing:
+   - Estimated Calories, Protein, and Carbs.
+   - A realistic "Junk Level" and "Heart Health Score" out of 100 based on your workout intensity and food choices.
+   - Actionable "Habits" to start.
+   - Dynamic, healthy "Recipes" tailored for students.
 
-## 💡 Solution
-CampusFuel AI provides a **fast and simple way** to:
-- Enter daily food items
-- Get instant calorie estimation
-- Receive a health score and suggestions
+### Assumptions Made
+- We assume students prefer qualitative, "vibe-check" style feedback rather than exact gram-for-gram counting.
+- The BMI calculation uses standard metric formulas.
+- The app assumes the user will supply a valid `GEMINI_API_KEY` in their environment variables to unleash the full power of the AI.
 
----
-
-## ⚙️ Features
-- 🧾 Food logging (simple text input)
-- 🔥 Calorie estimation
-- 🥗 Nutrition analysis (protein, carbs, junk level)
-- 📊 Daily health score (out of 10)
-- 💡 Smart suggestions for improvement
-- ⚡ Quick and student-friendly interface
-
----
-
-## 🧠 How It Works
-1. User enters food items (e.g., rice, chicken, coke)
-2. AI analyzes the input
-3. Outputs:
-   - Calories
-   - Nutrition breakdown
-   - Health rating
-   - Suggestions
-
----
-
-## 🤖 AI Logic
-The system uses prompt-based AI to:
-- Estimate calories
-- Detect unhealthy patterns
-- Generate a health score
-- Suggest practical improvements
-
----
-
-## 🛠️ Tech Stack
-- HTML
-- CSS
-- JavaScript
-- Google AI (via Antigravity / Gemini)
-
----
-
-## 🚀 How to Run
-1. Clone the repository
-2. Open the project in browser
-3. Enter food items
-4. Click "Analyze my day"
-
----
-
-## ⚠️ Assumptions
-- Calorie values are approximate
-- Input is text-based
-- Not a medical-grade application
-
----
-
-## 📈 Future Improvements
-- Image-based food detection
-- Personalized diet plans
-- Integration with fitness tracking
-- User login & history tracking
-
----
-
-## 🏁 Conclusion
-CampusFuel AI simplifies diet tracking for students by combining AI with a minimal interface, making healthy habits easier to build.
-
----
-
-## 👨‍💻 Author
-Aditya Kumar Shaw
+## Getting Started
+1. Set your `GEMINI_API_KEY` as an environment variable.
+2. Compile and run the Java backend: `CampusFuelServer.java`.
+3. Open `http://localhost:8080` in your browser.

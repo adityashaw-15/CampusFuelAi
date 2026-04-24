@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusFuel AI | Student Diet Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="orb orb-one" aria-hidden="true"></div>
+  <div class="orb orb-two" aria-hidden="true"></div>
+  <div class="site-shell">
+    <header class="topbar" aria-label="CampusFuel AI header">
+      <a class="brand" href="#" aria-label="CampusFuel AI home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M32 8c14.4 0 26 11.6 26 26S46.4 60 32 60 6 48.4 6 34 17.6 8 32 8Z" />
+            <path d="M20 30c4.5-7.6 19.5-7.6 24 0" />
+            <path d="M24 39h16" />
+            <path d="M18 20c3.2 2.7 6.8 4 10.8 4s7.6-1.3 10.8-4" />
+          </svg>
+        </span>
+        <span>
+          <strong>CampusFuel AI</strong>
+          <small>Simple fitness and diet pal for students</small>
+        </span>
+      </a>
+
+      <div class="top-actions">
+        <span class="status-pill">Calories, macros, junk level, rating, score</span>
+        <button class="ghost-button" id="loadHostelDay" type="button">Load hostel day</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow">Student-friendly AI fitness pal</p>
+          <h1 id="heroTitle">Track what you ate today and get a fast health check.</h1>
+          <p class="hero-text">
+            Paste simple food items like <strong>2 eggs</strong>, <strong>rice</strong>,
+            <strong>dal</strong>, or <strong>burger + cola</strong>. CampusFuel AI gives
+            you estimated calories, protein, carbs, junk-food level, a short rating,
+            a daily score out of 10, and easy fixes you can actually follow.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-button" href="#analyzer">Try the analyzer</a>
+            <button class="secondary-button" id="loadGymDay" type="button">See a gym day</button>
+          </div>
+
+          <div class="hero-points" aria-label="Key features">
+            <span>Short outputs</span>
+            <span>Mess food friendly</span>
+            <span>No calorie counting headache</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="plate-card">
+            <div class="plate-stage">
+              <span class="macro-pill protein-pill">Protein</span>
+              <span class="macro-pill carbs-pill">Carbs</span>
+              <span class="macro-pill junk-pill">Junk check</span>
+              <div class="plate-core">
+                <span class="plate-center-dot"></span>
+              </div>
+            </div>
+
+            <div class="visual-score">
+              <span>Today</span>
+              <strong>7.4 / 10</strong>
+              <p>Average, but easy to improve.</p>
+            </div>
+
+            <div class="note-card note-one">
+              <span>Breakfast</span>
+              <strong>2 eggs + oats</strong>
+            </div>
+            <div class="note-card note-two">
+              <span>Warning</span>
+              <strong>Cola spikes junk score</strong>
+            </div>
+            <div class="note-card note-three">
+              <span>Quick win</span>
+              <strong>Add curd or fruit</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="analyzer-grid" id="analyzer" aria-label="Diet analysis workspace">
+        <section class="panel input-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow small">Daily food log</p>
+              <h2>Enter your meals and snacks</h2>
+            </div>
+            <span class="mini-chip" id="entryCount">0 items</span>
+          </div>
+
+          <p class="panel-text">
+            Enter your details for personalized AI advice, then log your meals.
+          </p>
+
+          <form class="profile-form" id="profileForm" style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+            <label class="field" style="flex: 1; min-width: 80px;">
+              <span>Height (cm)</span>
+              <input type="number" id="heightInput" placeholder="170" value="170" style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border);" />
+            </label>
+            <label class="field" style="flex: 1; min-width: 80px;">
+              <span>Weight (kg)</span>
+              <input type="number" id="weightInput" placeholder="65" value="65" style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border);" />
+            </label>
+            <label class="field" style="flex: 1; min-width: 100px;">
+              <span>Workout Level</span>
+              <select id="workoutInput" style="width: 100%; padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border);">
+                <option value="none">None</option>
+                <option value="light">Light (1-2 days)</option>
+                <option value="moderate">Moderate (3-5 days)</option>
+                <option value="heavy">Heavy (6-7 days)</option>
+              </select>
+            </label>
+            <div style="flex-basis: 100%; font-size: 0.9rem; margin-top: -0.5rem; color: var(--text-muted);">
+              <strong>BMI: </strong><span id="bmiValue">22.5</span> <span id="bmiStatus">(Normal)</span>
+            </div>
+          </form>
+
+          <form class="food-form" id="foodForm">
+            <label class="field">
+              <span>Food items</span>
+              <textarea id="foodInput" placeholder="2 eggs&#10;oats with milk&#10;rice&#10;dal&#10;banana&#10;cold coffee"></textarea>
+            </label>
+
+            <div class="chip-grid" aria-label="Quick add foods">
+              <button class="chip-button" type="button" data-food="2 eggs">2 eggs</button>
+              <button class="chip-button" type="button" data-food="rice">rice</button>
+              <button class="chip-button" type="button" data-food="dal">dal</button>
+              <button class="chip-button" type="button" data-food="paneer">paneer</button>
+              <button class="chip-button" type="button" data-food="banana">banana</button>
+              <button class="chip-button" type="button" data-food="burger">burger</button>
+              <button class="chip-button" type="button" data-food="cola">cola</button>
+              <button class="chip-button" type="button" data-food="curd">curd</button>
+            </div>
+
+            <div class="sample-row" aria-label="Sample day presets">
+              <button class="sample-card" type="button" data-sample="hostel">
+                <strong>Hostel Mess Day</strong>
+                <span>Balanced enough, with one fried extra.</span>
+              </button>
+              <button class="sample-card" type="button" data-sample="exam">
+                <strong>Exam Rush Day</strong>
+                <span>Snack-heavy day with low protein.</span>
+              </button>
+              <button class="sample-card" type="button" data-sample="gym">
+                <strong>Gym Day</strong>
+                <span>Higher protein and fuller meals.</span>
+              </button>
+            </div>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Analyze my day</button>
+              <button class="secondary-button" id="clearLog" type="button">Clear log</button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel result-panel" aria-live="polite">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow small">AI snapshot</p>
+              <h2>Your diet report</h2>
+            </div>
+            <span class="score-pill average" id="ratingBadge">Average</span>
+          </div>
+
+          <div class="stats-grid">
+            <article class="metric-card">
+              <span>Calories</span>
+              <strong id="calorieValue">0</strong>
+              <small>kcal today</small>
+            </article>
+            <article class="metric-card">
+              <span>Protein</span>
+              <strong id="proteinValue">0g</strong>
+              <small>easy muscle and fullness check</small>
+            </article>
+            <article class="metric-card">
+              <span>Carbs</span>
+              <strong id="carbValue">0g</strong>
+              <small>main energy estimate</small>
+            </article>
+            <article class="metric-card">
+              <span>Junk level</span>
+              <strong id="junkValue">10/10</strong>
+              <small>fried and sugary load</small>
+            </article>
+            <article class="metric-card">
+              <span>Health rating</span>
+              <strong id="ratingValue">Average</strong>
+              <small>Good / Average / Poor</small>
+            </article>
+            <article class="metric-card">
+              <span>Heart Health</span>
+              <strong id="heartScoreValue">--/100</strong>
+              <small>diet + workout sync</small>
+            </article>
+            <article class="metric-card">
+              <span>Daily score</span>
+              <strong id="scoreValue">0.0</strong>
+              <small>out of 10</small>
+            </article>
+          </div>
+
+          <div class="coach-card">
+            <div>
+              <p class="coach-kicker">Short answer</p>
+              <p class="coach-summary" id="summaryText">
+                Add a few foods to see your daily calories, macros, and health score.
+              </p>
+            </div>
+            <div class="coach-points" id="coachPoints"></div>
+          </div>
+
+          <div class="bars-grid">
+            <article class="bar-card">
+              <div class="bar-top">
+                <span>Protein balance</span>
+                <strong id="proteinNote">Needs data</strong>
+              </div>
+              <div class="meter protein-meter">
+                <span id="proteinBar"></span>
+              </div>
+            </article>
+            <article class="bar-card">
+              <div class="bar-top">
+                <span>Carb balance</span>
+                <strong id="carbNote">Needs data</strong>
+              </div>
+              <div class="meter carb-meter">
+                <span id="carbBar"></span>
+              </div>
+            </article>
+            <article class="bar-card">
+              <div class="bar-top">
+                <span>Junk pressure</span>
+                <strong id="junkNote">Needs data</strong>
+              </div>
+              <div class="meter junk-meter">
+                <span id="junkBar"></span>
+              </div>
+            </article>
+          </div>
+
+          <div class="result-lower">
+            <section>
+              <h3>Simple suggestions</h3>
+              <ul class="suggestion-list" id="suggestionList"></ul>
+            </section>
+
+            <section style="margin-top: 1.5rem;">
+              <h3>Start a Habit</h3>
+              <ul class="suggestion-list" id="habitList" style="list-style-type: square;">
+                <li>Loading AI habits...</li>
+              </ul>
+            </section>
+
+            <section style="margin-top: 1.5rem;">
+              <h3>Healthy Recipes for You</h3>
+              <ul class="suggestion-list" id="recipeList" style="list-style-type: circle;">
+                <li>Loading AI recipes...</li>
+              </ul>
+            </section>
+
+            <section style="margin-top: 1.5rem;">
+              <div class="subheading">
+                <h3>Detected foods</h3>
+                <span class="mini-chip" id="matchBadge">0 matched</span>
+              </div>
+              <ul class="food-list" id="foodList"></ul>
+            </section>
+          </div>
+        </section>
+      </section>
+
+      <section class="feature-strip" aria-label="Why this is useful for students">
+        <article class="feature-card">
+          <strong>Built for real student food</strong>
+          <p>Mess meals, chai, Maggi, burger runs, gym basics, and random hostel snacks all work.</p>
+        </article>
+        <article class="feature-card">
+          <strong>Short practical outputs</strong>
+          <p>You get a quick answer instead of a long lecture, so it feels more usable day to day.</p>
+        </article>
+        <article class="feature-card">
+          <strong>Fast enough to use daily</strong>
+          <p>Paste a rough list, get a score, then improve one or two things instead of starting over.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Estimated values only. This is a simple student wellness tool, not medical advice.
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
